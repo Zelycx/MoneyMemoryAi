@@ -1,9 +1,14 @@
 package com.example.moneymemoryai;
 
+// Object Imports
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+// Activity Imports
+import android.content.Intent;
+
+// Library Imports
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -26,7 +31,10 @@ public class HomeActivity extends AppCompatActivity {
         btnGain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnGain.setText("Clicked!");
+                // Intent to gain activity
+                Intent intent = new Intent(HomeActivity.this, GainActivity.class);
+                // start the activity
+                startActivity(intent);
             }
         });
 
