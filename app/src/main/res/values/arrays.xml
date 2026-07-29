@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="income_sources">
+
+        <item>Please select a source.</item> // default value
+        <item>Salary</item>
+        <item>Gift</item>
+        <item>Allowance</item>
+        <item>Freelance</item>
+        <item>Business</item>
+        <item>Investment</item>
+        <item>Refund</item>
+
+    </string-array>
+
+</resources>
