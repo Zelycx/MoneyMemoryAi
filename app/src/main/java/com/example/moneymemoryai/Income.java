@@ -9,12 +9,12 @@ public class Income {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String amount;
+    private double amount;
     private String source;
     private String details;
     private String date;
 
-    public Income (String amount, String source, String details, String date) {
+    public Income(double amount, String source, String details, String date) {
         this.amount = amount;
         this.source = source;
         this.details = details;
@@ -29,11 +29,11 @@ public class Income {
         this.id = id;
     }
 
-    public String getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -60,5 +60,4 @@ public class Income {
     public void setDate(String date) {
         this.date = date;
     }
-
 }

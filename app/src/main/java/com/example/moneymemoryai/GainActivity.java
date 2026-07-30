@@ -46,7 +46,7 @@ public class GainActivity extends AppCompatActivity {
                 "MoneyMemoryDB"
         ).allowMainThreadQueries().build();
 
-        IncomeDao incomeDao = db.incomeDao();
+        incomeDao = db.incomeDao();
 
 
         btnBack = findViewById(R.id.btnBack);
@@ -78,9 +78,12 @@ public class GainActivity extends AppCompatActivity {
 
         btnSaveIncome = findViewById(R.id.btnSaveIncome);
         btnSaveIncome.setOnClickListener(v -> {
-            String amount = etAmount.getText().toString().trim();
+
+
             String details = etDetails.getText().toString().trim();
-            if (amount.isEmpty()) {
+
+            String amountText = etAmount.getText().toString().trim();
+            if (amountText.isEmpty()) {
                 Toast.makeText(this, "Please enter an amount.", Toast.LENGTH_SHORT).show();
                 return;
             } else if (spSource.getSelectedItemPosition() == 0) {
@@ -94,6 +97,14 @@ public class GainActivity extends AppCompatActivity {
                 return;
             }
 
+            double amount;
+            try{
+                amount = Double.parseDouble(amountText);
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Please enter a valid amount.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             Income income = new Income(
                     amount,
                     spSource.getSelectedItem().toString(),
@@ -104,6 +115,11 @@ public class GainActivity extends AppCompatActivity {
             incomeDao.insert(income);
 
                 Toast.makeText(this, "Income saved successfully!", Toast.LENGTH_SHORT).show();
+                etAmount.setText("");
+                etDetails.setText("");
+                spSource.setSelection(0);
+                btnSelectDate.setText("Select Date");
+                etAmount.requestFocus();
         });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

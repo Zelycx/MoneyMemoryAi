@@ -7,6 +7,7 @@ import android.widget.Button;
 
 // Activity Imports
 import android.content.Intent;
+import android.widget.TextView;
 
 // Library Imports
 import androidx.activity.EdgeToEdge;
@@ -14,10 +15,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.room.Room;
 
 public class HomeActivity extends AppCompatActivity {
 
+    // widgets
     Button btnGain;
+    TextView tvBalance;
+
+    // database imports
+    AppDatabase db;
+    IncomeDao incomeDao;
 
 
     @Override
@@ -25,6 +33,19 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
+
+        db = Room.databaseBuilder(
+                getApplicationContext(),
+                AppDatabase.class,
+                "MoneyMemoryDB"
+        ).allowMainThreadQueries().build();
+
+        incomeDao = db.incomeDao();
+
+
+
+        tvBalance = findViewById(R.id.tvBalance);
+        updateBalance();
 
         btnGain = findViewById(R.id.btnGain); // the initialization of gain button
         // bottom are the onclick listeners for the button
@@ -44,5 +65,21 @@ public class HomeActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateBalance();
+    }
+
+    private void updateBalance() {
+        Double totalIncome = incomeDao.getTotalIncome();
+
+        if (totalIncome == null) {
+            totalIncome = 0.0;
+        }
+
+        tvBalance.setText("₱" + totalIncome);
     }
 }
