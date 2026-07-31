@@ -5,16 +5,17 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GainActivity">
+    tools:context=".ExpenseActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/contentLayout"
@@ -25,40 +26,37 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/HeaderLayout"
                 android:layout_width="match_parent"
-                android:layout_height="63dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="78dp">
 
                 <ImageButton
                     android:id="@+id/btnBack"
-                    android:layout_width="55dp"
-                    android:layout_height="51dp"
+                    android:layout_width="57dp"
+                    android:layout_height="60dp"
                     android:layout_marginStart="16dp"
                     android:contentDescription="Back"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.514"
                     app:srcCompat="@drawable/ic_arrow_back" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/TitleLayout"
                 android:layout_width="match_parent"
-                android:layout_height="107dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/HeaderLayout">
+                android:layout_height="115dp">
 
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="Add Income"
+                    android:layout_marginTop="28dp"
+                    android:text="Add Expense"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,9 +64,10 @@
                     android:id="@+id/tvSubtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Track where your money came from."
-                    android:textSize="16sp"
+                    android:layout_marginTop="8dp"
+                    android:text="Track every peso you spend."
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -76,10 +75,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/AmountLayout"
                 android:layout_width="match_parent"
-                android:layout_height="127dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TitleLayout">
+                android:layout_height="162dp">
 
                 <TextView
                     android:id="@+id/tvAmount"
@@ -96,103 +92,151 @@
                 <EditText
                     android:id="@+id/etAmount"
                     android:layout_width="0dp"
-                    android:layout_height="61dp"
+                    android:layout_height="70dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:ems="10"
-                    android:hint="Enter Amount"
+                    android:hint="Enter amount"
                     android:inputType="numberDecimal"
-                    android:singleLine="true"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.592"
-                    app:layout_constraintTop_toBottomOf="@+id/tvAmount"
-                    app:layout_constraintVertical_bias="0.38" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAmount" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/SourceLayout"
+                android:id="@+id/CategoryLayout"
                 android:layout_width="match_parent"
-                android:layout_height="152dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/AmountLayout">
+                android:layout_height="162dp">
 
                 <TextView
-                    android:id="@+id/tvSource"
+                    android:id="@+id/tvCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Source *"
+                    android:text="Category *"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:id="@+id/spSource"
+                    android:id="@+id/spCategory"
                     android:layout_width="0dp"
-                    android:layout_height="72dp"
+                    android:layout_height="55dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:entries="@array/income_sources"
+                    android:entries="@array/expense_category"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.486"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSource"
-                    app:layout_constraintVertical_bias="0.619" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/DetailsLayout"
+                android:id="@+id/ItemLayout"
                 android:layout_width="match_parent"
-                android:layout_height="266dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/AddSourceLayout">
+                android:layout_height="162dp">
 
                 <TextView
-                    android:id="@+id/tvDetails"
+                    android:id="@+id/tvItem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Details *"
+                    android:text="Item *"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/etDetails"
-                    android:layout_width="0dp"
-                    android:layout_height="163dp"
+                    android:id="@+id/etItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
-                    android:gravity="top"
-                    android:hint="Describe where this income came from..."
+                    android:hint="What did you buy?"
                     android:inputType="text"
-                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.509"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDetails"
-                    app:layout_constraintVertical_bias="0.753" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvItem" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/StoreLayout"
+                android:layout_width="match_parent"
+                android:layout_height="162dp">
+
+                <TextView
+                    android:id="@+id/tvStore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Store / Place Bought *"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etStore"
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="Where did you buy it?"
+                    android:inputType="text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvStore" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/NotesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="162dp">
+
+                <TextView
+                    android:id="@+id/tvNotes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Notes (Optional)"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/etNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="62dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="Anything you'd like to remember?"
+                    android:inputType="text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNotes" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/DateLayout"
                 android:layout_width="match_parent"
-                android:layout_height="138dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/DetailsLayout">
+                android:layout_height="162dp">
 
                 <TextView
                     android:id="@+id/tvDate"
@@ -208,26 +252,26 @@
 
                 <Button
                     android:id="@+id/btnSelectDate"
-                    android:layout_width="295dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_width="220dp"
+                    android:layout_height="56dp"
                     android:text="Select Date"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDate"
-                    app:layout_constraintVertical_bias="0.284" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/SaveLayout"
                 android:layout_width="match_parent"
-                android:layout_height="106dp">
+                android:layout_height="162dp">
 
                 <Button
-                    android:id="@+id/btnSaveIncome"
+                    android:id="@+id/btnSaveExpense"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Save Income"
+                    android:text="Save Expense"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -235,9 +279,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
-
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

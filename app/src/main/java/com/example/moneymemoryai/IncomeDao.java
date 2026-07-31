@@ -4,7 +4,6 @@ package com.example.moneymemoryai;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 // tells that this is a room database
 @Dao
@@ -13,6 +12,6 @@ public interface IncomeDao {
     @Insert
     void insert(Income income);
 
-    @Query("SELECT SUM(amount) FROM Income")
+    @Query("SELECT SUM(amount) FROM income")
     Double getTotalIncome();
 }

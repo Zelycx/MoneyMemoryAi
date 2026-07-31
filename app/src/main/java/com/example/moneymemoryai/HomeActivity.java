@@ -21,6 +21,7 @@ public class HomeActivity extends AppCompatActivity {
 
     // widgets
     Button btnGain;
+    Button btnExpense;
     TextView tvBalance;
 
     // database imports
@@ -58,6 +59,13 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnExpense = findViewById(R.id.btnExpense);
+        btnExpense.setOnClickListener(v ->{
+            Intent intent = new Intent(HomeActivity.this, ExpenseActivity.class);
+            startActivity(intent);
+        });
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

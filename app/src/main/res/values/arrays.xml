@@ -11,7 +11,23 @@
         <item>Business</item>
         <item>Investment</item>
         <item>Refund</item>
+        <item>Other</item>
 
     </string-array>
+    
+    <string-array name="expense_category">
+
+        <item>Select Category</item>
+        <item>Food</item>
+        <item>Transportation</item>
+        <item>Shopping</item>
+        <item>Bills</item>
+        <item>Health</item>
+        <item>Entertainment</item>
+        <item>Education</item>
+        <item>Other</item>
+
+    </string-array>
+
 
 </resources>
