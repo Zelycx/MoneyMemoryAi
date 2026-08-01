@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     // database imports
     AppDatabase db;
     IncomeDao incomeDao;
+    ExpenseDao expenseDao;
 
 
     @Override
@@ -42,6 +43,8 @@ public class HomeActivity extends AppCompatActivity {
         ).allowMainThreadQueries().build();
 
         incomeDao = db.incomeDao();
+        expenseDao = db.expenseDao();
+
 
 
 
@@ -81,13 +84,29 @@ public class HomeActivity extends AppCompatActivity {
         updateBalance();
     }
 
-    private void updateBalance() {
+    private Double getTotalIncome(){
         Double totalIncome = incomeDao.getTotalIncome();
 
-        if (totalIncome == null) {
+        if(totalIncome == null){
             totalIncome = 0.0;
         }
 
-        tvBalance.setText("₱" + totalIncome);
+        return totalIncome;
     }
+
+    private Double getTotalExpense() {
+        Double totalExpense = expenseDao.getTotalExpense();
+
+        if(totalExpense == null) {
+            totalExpense = 0.0;
+        }
+
+        return totalExpense;
+    }
+
+
+    private void updateBalance() {
+        Double finalBalance = getTotalIncome() - getTotalExpense();
+        tvBalance.setText(String.format("₱%.2f", finalBalance));
+        }
 }
