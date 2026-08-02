@@ -77,4 +77,17 @@ public class Transaction {
     public long getTimestamp() {
         return timestamp;
     }
+
+    public String getTime() {
+
+        java.text.SimpleDateFormat sdf =
+                new java.text.SimpleDateFormat(
+                        "h:mm a",
+                        java.util.Locale.getDefault()
+                );
+
+        return sdf.format(
+                new java.util.Date(timestamp)
+        );
+    }
 }

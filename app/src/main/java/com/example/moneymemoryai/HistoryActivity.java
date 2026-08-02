@@ -25,7 +25,7 @@
         IncomeDao incomeDao;
         ExpenseDao expenseDao;
 
-        ArrayList<Transaction> transactionList;
+        ArrayList<HistoryItem> historyList;
         HistoryAdapter historyAdapter;
 
         @Override
@@ -51,11 +51,11 @@
             incomeDao = db.incomeDao();
             expenseDao = db.expenseDao();
 
-            transactionList = new ArrayList<>();
+            historyList = new ArrayList<>();
 
             rvHistory.setLayoutManager(new LinearLayoutManager(this));
 
-            historyAdapter = new HistoryAdapter(transactionList);
+            historyAdapter = new HistoryAdapter(historyList);
             rvHistory.setAdapter(historyAdapter);
 
             loadTransactions();
@@ -68,21 +68,122 @@
             });
         }
         private void loadTransactions() {
-            transactionList.clear();
 
+            historyList.clear();
+
+
+            ArrayList<Transaction> allTransactions = new ArrayList<>();
+
+
+            // Get incomes
             List<Income> incomes = incomeDao.getAllIncome();
+
             for (Income income : incomes) {
-                transactionList.add(Transaction.fromIncome(income));
+
+                allTransactions.add(
+                        Transaction.fromIncome(income)
+                );
+
             }
 
+
+            // Get expenses
             List<Expense> expenses = expenseDao.getAllExpense();
+
             for (Expense expense : expenses) {
-                transactionList.add(Transaction.fromExpense(expense));
+
+                allTransactions.add(
+                        Transaction.fromExpense(expense)
+                );
+
             }
 
-            transactionList.sort((t1, t2) ->
-                    Long.compare(t2.getTimestamp(), t1.getTimestamp()));
+
+            // Sort newest first
+            allTransactions.sort((t1, t2) ->
+                    Long.compare(
+                            t2.getTimestamp(),
+                            t1.getTimestamp()
+                    )
+            );
+
+
+            String lastDate = "";
+
+
+            for (Transaction transaction : allTransactions) {
+
+
+                String currentDate = transaction.getDate();
+
+
+                if (!currentDate.equals(lastDate)) {
+
+                    historyList.add(
+                            new HistoryItem(getFriendlyDate(currentDate))
+                    );
+
+                    lastDate = currentDate;
+                }
+
+
+                historyList.add(
+                        new HistoryItem(transaction)
+                );
+
+            }
+
 
             historyAdapter.notifyDataSetChanged();
+
+        }
+
+        private String getFriendlyDate(String date) {
+
+            if (date.equals(getTodayDate())) {
+                return "Today";
+            }
+
+            if (date.equals(getYesterdayDate())) {
+                return "Yesterday";
+            }
+
+            return date;
+        }
+
+        private String getTodayDate() {
+
+            java.text.SimpleDateFormat sdf =
+                    new java.text.SimpleDateFormat(
+                            "d/M/yyyy",
+                            java.util.Locale.getDefault()
+                    );
+
+            return sdf.format(
+                    new java.util.Date()
+            );
+        }
+
+
+        private String getYesterdayDate() {
+
+            java.util.Calendar calendar =
+                    java.util.Calendar.getInstance();
+
+            calendar.add(
+                    java.util.Calendar.DAY_OF_YEAR,
+                    -1
+            );
+
+
+            java.text.SimpleDateFormat sdf =
+                    new java.text.SimpleDateFormat(
+                            "d/M/yyyy",
+                            java.util.Locale.getDefault()
+                    );
+
+            return sdf.format(
+                    calendar.getTime()
+            );
         }
     }
