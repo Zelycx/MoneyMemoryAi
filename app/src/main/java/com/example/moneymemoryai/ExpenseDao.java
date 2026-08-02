@@ -4,6 +4,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.List;
+
 @Dao
 public interface ExpenseDao {
     @Insert
@@ -11,4 +13,7 @@ public interface ExpenseDao {
 
     @Query("SELECT SUM(amount) FROM expense")
     Double getTotalExpense();
+
+    @Query("SELECT * FROM expense")
+    List<Expense> getAllExpense();
 }

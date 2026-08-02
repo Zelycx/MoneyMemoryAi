@@ -22,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     // widgets
     Button btnGain;
     Button btnExpense;
+    Button btnHistory;
     TextView tvBalance;
 
     // database imports
@@ -68,6 +69,13 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(HomeActivity.this, ExpenseActivity.class);
             startActivity(intent);
         });
+
+        btnHistory = findViewById(R.id.btnHistory);
+        btnHistory.setOnClickListener(v ->{
+            Intent intent = new Intent(HomeActivity.this, HistoryActivity.class);
+            startActivity(intent);
+        });
+
 
 
 

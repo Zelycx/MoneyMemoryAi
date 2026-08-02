@@ -14,6 +14,8 @@ public class Expense {
     private String store;
     private String notes;
     private String date;
+    private long timestamp;
+
 
     public Expense(double amount, String category, String item, String store, String notes, String date) {
         this.amount = amount;
@@ -22,6 +24,8 @@ public class Expense {
         this.store = store;
         this.notes = notes;
         this.date = date;
+        this.timestamp = System.currentTimeMillis();
+
     }
 
     public int getId() {
@@ -78,5 +82,13 @@ public class Expense {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

@@ -1,0 +1,80 @@
+package com.example.moneymemoryai;
+
+public class Transaction {
+    private String type, title, date, details;
+    private double amount;
+    private boolean expanded = false;
+    private long timestamp;
+
+    public Transaction(String type,
+                       double amount,
+                       String title,
+                       String date,
+                       String details,
+                       long timestamp) {
+        this.type = type;
+        this.amount = amount;
+        this.title = title;
+        this.date = date;
+        this.details = details;
+        this.timestamp = timestamp;
+    }
+
+    public static Transaction fromIncome(Income income) {
+        return new Transaction(
+                "Income",
+                income.getAmount(),
+                income.getSource(),
+                income.getDate(),
+                income.getDetails(),
+                income.getTimestamp()
+        );
+    }
+
+    public static Transaction fromExpense(Expense expense) {
+        return new Transaction(
+                "Expense",
+                expense.getAmount(),
+                expense.getCategory(),
+                expense.getDate(),
+                "Item: " + expense.getItem() +
+                        "\nStore: " + expense.getStore() +
+                        "\nNotes: " + expense.getNotes(),
+                expense.getTimestamp()
+        );
+    }
+
+    // getters
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public boolean isExpanded() {
+        return expanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        this.expanded = expanded;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+}

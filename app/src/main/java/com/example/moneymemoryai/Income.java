@@ -13,12 +13,14 @@ public class Income {
     private String source;
     private String details;
     private String date;
+    private long timestamp;
 
     public Income(double amount, String source, String details, String date) {
         this.amount = amount;
         this.source = source;
         this.details = details;
         this.date = date;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public int getId() {
@@ -59,5 +61,13 @@ public class Income {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
