@@ -19,4 +19,7 @@ public interface IncomeDao {
 
     @Query("SELECT * FROM income")
     List<Income> getAllIncome();
+
+    @Query("DELETE FROM income WHERE id = :id")
+    void deleteById(int id);
 }

@@ -16,4 +16,7 @@ public interface ExpenseDao {
 
     @Query("SELECT * FROM expense")
     List<Expense> getAllExpense();
+
+    @Query("DELETE FROM expense WHERE id = :id")
+    void deleteById(int id);
 }

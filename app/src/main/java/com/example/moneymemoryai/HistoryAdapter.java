@@ -12,12 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+
 public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<HistoryItem> historyList;
+    private OnTransactionLongClickListener listener;
 
-    public HistoryAdapter(List<HistoryItem> historyList) {
+    public HistoryAdapter(
+            List<HistoryItem> historyList,
+            OnTransactionLongClickListener listener
+    ) {
         this.historyList = historyList;
+        this.listener = listener;
     }
 
 
@@ -149,6 +156,28 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 );
 
                 notifyItemChanged(position);
+
+            });
+
+            transactionHolder.itemView.setOnLongClickListener(v -> {
+
+                new AlertDialog.Builder(v.getContext())
+                        .setTitle("Delete " + transaction.getType() + "?")
+                        .setMessage(
+                                transaction.getTitle()
+                                        + "\n₱"
+                                        + String.format("%.2f", transaction.getAmount())
+                                        + "\n\nThis action cannot be undone."
+                        )
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Delete", (dialog, which) -> {
+
+                            listener.onDelete(transaction);
+
+                        })
+                        .show();
+
+                return true;
 
             });
 

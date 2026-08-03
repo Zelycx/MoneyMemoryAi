@@ -2,6 +2,7 @@
 
     import android.os.Bundle;
     import android.util.Log;
+    import android.view.View;
     import android.widget.ImageButton;
 
     import androidx.activity.EdgeToEdge;
@@ -19,7 +20,9 @@
 
     public class HistoryActivity extends AppCompatActivity {
 
+
         RecyclerView rvHistory;
+        View emptyHistoryView;
         ImageButton btnBack;
         AppDatabase db;
         IncomeDao incomeDao;
@@ -39,6 +42,10 @@
                 finish();
             });
 
+            rvHistory = findViewById(R.id.rvHistory);
+            emptyHistoryView = findViewById(R.id.emptyHistoryView);
+
+
 
             rvHistory = findViewById(R.id.rvHistory);
 
@@ -55,7 +62,22 @@
 
             rvHistory.setLayoutManager(new LinearLayoutManager(this));
 
-            historyAdapter = new HistoryAdapter(historyList);
+            historyAdapter = new HistoryAdapter(historyList, transaction -> {
+
+                if (transaction.getType().equals("Income")) {
+
+                    incomeDao.deleteById(transaction.getId());
+
+                } else {
+
+                    expenseDao.deleteById(transaction.getId());
+
+                }
+
+                loadTransactions();
+
+            });
+
             rvHistory.setAdapter(historyAdapter);
 
             loadTransactions();
@@ -135,6 +157,17 @@
 
 
             historyAdapter.notifyDataSetChanged();
+            if (historyList.isEmpty()) {
+
+                rvHistory.setVisibility(View.GONE);
+                emptyHistoryView.setVisibility(View.VISIBLE);
+
+            } else {
+
+                rvHistory.setVisibility(View.VISIBLE);
+                emptyHistoryView.setVisibility(View.GONE);
+
+            }
 
         }
 

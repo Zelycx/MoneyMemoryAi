@@ -1,17 +1,28 @@
 package com.example.moneymemoryai;
 
 public class Transaction {
-    private String type, title, date, details;
+
+    private int id;
+    private String type;
+    private String title;
+    private String date;
+    private String details;
+
     private double amount;
     private boolean expanded = false;
     private long timestamp;
 
-    public Transaction(String type,
-                       double amount,
-                       String title,
-                       String date,
-                       String details,
-                       long timestamp) {
+
+    public Transaction(
+            int id,
+            String type,
+            double amount,
+            String title,
+            String date,
+            String details,
+            long timestamp
+    ) {
+        this.id = id;
         this.type = type;
         this.amount = amount;
         this.title = title;
@@ -20,8 +31,10 @@ public class Transaction {
         this.timestamp = timestamp;
     }
 
+
     public static Transaction fromIncome(Income income) {
         return new Transaction(
+                income.getId(),
                 "Income",
                 income.getAmount(),
                 income.getSource(),
@@ -31,8 +44,10 @@ public class Transaction {
         );
     }
 
+
     public static Transaction fromExpense(Expense expense) {
         return new Transaction(
+                expense.getId(),
                 "Expense",
                 expense.getAmount(),
                 expense.getCategory(),
@@ -44,39 +59,51 @@ public class Transaction {
         );
     }
 
-    // getters
+
+    public int getId() {
+        return id;
+    }
+
 
     public String getTitle() {
         return title;
     }
 
+
     public String getDetails() {
         return details;
     }
+
 
     public String getType() {
         return type;
     }
 
+
     public String getDate() {
         return date;
     }
+
 
     public double getAmount() {
         return amount;
     }
 
+
     public boolean isExpanded() {
         return expanded;
     }
+
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
     }
 
+
     public long getTimestamp() {
         return timestamp;
     }
+
 
     public String getTime() {
 
